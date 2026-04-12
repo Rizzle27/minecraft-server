@@ -26,7 +26,37 @@ for %%f in ("%MODS_SRC%\*.jar") do (
 )
 
 echo.
-echo Listo! Se instalaron %COUNT% mod(s) en:
+echo Se copiaron %COUNT% mod(s). Resolviendo incompatibilidades...
+echo.
+
+:: sodium e iris son incompatibles con embeddium
+for %%f in ("%MC_MODS%\sodium*.jar") do (
+    for %%g in ("%MC_MODS%\embeddium*.jar") do (
+        echo Removiendo %%~nxg (incompatible con Sodium^)...
+        del "%%g"
+    )
+)
+for %%f in ("%MC_MODS%\iris*.jar") do (
+    for %%g in ("%MC_MODS%\embeddium*.jar") do (
+        echo Removiendo %%~nxg (incompatible con Iris^)...
+        del "%%g"
+    )
+)
+
+:: embeddium es incompatible con sodium e iris
+for %%f in ("%MC_MODS%\embeddium*.jar") do (
+    for %%g in ("%MC_MODS%\sodium*.jar") do (
+        echo Removiendo %%~nxg (incompatible con Embeddium^)...
+        del "%%g"
+    )
+    for %%g in ("%MC_MODS%\iris*.jar") do (
+        echo Removiendo %%~nxg (incompatible con Embeddium^)...
+        del "%%g"
+    )
+)
+
+echo.
+echo Listo! Mods instalados en:
 echo %MC_MODS%
 echo.
 pause
