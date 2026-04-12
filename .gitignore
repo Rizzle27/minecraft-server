@@ -1,0 +1,26 @@
+server.jar
+world/
+world_nether/
+world_the_end/
+backups/
+logs/
+crash-reports/
+plugins/
+*.pid
+.playit.pid
+playit
+playit_secret.toml
+banned-ips.json
+banned-players.json
+usercache.json
+usernamecache.json
+whitelist.json
+ops.json
+
+# Large generated/binary files
+libraries/
+cache/
+versions/
+*.jar
+*.jar.log
+.DS_Store
