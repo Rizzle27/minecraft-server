@@ -16,6 +16,9 @@ if not exist "%MODS_SRC%" (
 if not exist "%MC_MODS%" (
     echo Creando carpeta mods en %MC_MODS%...
     mkdir "%MC_MODS%"
+) else (
+    echo Limpiando mods anteriores...
+    del /Q "%MC_MODS%\*.jar" >nul 2>&1
 )
 
 set COUNT=0
@@ -26,37 +29,7 @@ for %%f in ("%MODS_SRC%\*.jar") do (
 )
 
 echo.
-echo Se copiaron %COUNT% mod(s). Resolviendo incompatibilidades...
-echo.
-
-:: sodium e iris son incompatibles con embeddium
-for %%f in ("%MC_MODS%\sodium*.jar") do (
-    for %%g in ("%MC_MODS%\embeddium*.jar") do (
-        echo Removiendo %%~nxg (incompatible con Sodium^)...
-        del "%%g"
-    )
-)
-for %%f in ("%MC_MODS%\iris*.jar") do (
-    for %%g in ("%MC_MODS%\embeddium*.jar") do (
-        echo Removiendo %%~nxg (incompatible con Iris^)...
-        del "%%g"
-    )
-)
-
-:: embeddium es incompatible con sodium e iris
-for %%f in ("%MC_MODS%\embeddium*.jar") do (
-    for %%g in ("%MC_MODS%\sodium*.jar") do (
-        echo Removiendo %%~nxg (incompatible con Embeddium^)...
-        del "%%g"
-    )
-    for %%g in ("%MC_MODS%\iris*.jar") do (
-        echo Removiendo %%~nxg (incompatible con Embeddium^)...
-        del "%%g"
-    )
-)
-
-echo.
-echo Listo! Mods instalados en:
+echo Listo! Se instalaron %COUNT% mod(s) en:
 echo %MC_MODS%
 echo.
 pause
